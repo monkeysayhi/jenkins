@@ -112,9 +112,8 @@ public abstract class LoadBalancer implements ExtensionPoint {
         private boolean assignGreedily(Mapping m, Task task, List<ConsistentHash<ExecutorChunk>> hashes, int i) {
             if (i==hashes.size())   return true;    // fully assigned
 
-            String key = task.getFullDisplayName() + (i>0 ? String.valueOf(i) : "");
-
-            for (ExecutorChunk ec : hashes.get(i).list(key)) {
+            String randomQuerySeed = String.valueOf(Math.random());
+            for (ExecutorChunk ec : hashes.get(i).list(randomQuerySeed)) {
                 // let's attempt this assignment
                 m.assign(i,ec);
 
