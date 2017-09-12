@@ -1666,7 +1666,8 @@ public class Queue extends ResourceController implements Saveable {
 
             Label lbl = p.getAssignedLabel();
             String fullDisplayName = p.task.getFullDisplayName();
-            for (Node n : hash.list(fullDisplayName)) {
+            String randomQuerySeed = String.valueOf(Math.random());
+            for (Node n : hash.list(randomQuerySeed)) {
                 final Computer c = n.toComputer();
                 if (c == null || c.isOffline()) {
                     continue;
